@@ -1,0 +1,114 @@
+/*
+ * Self-hosted fonts (latin subset, from Google Fonts, OFL). Only what the site
+ * uses: DM Sans 400–700 variable, DM Sans italic 400 (blog emphasis only) and
+ * Fraunces 600 with its optical-size axis (headings set opsz 40). The two
+ * upright files are preloaded in index.html.
+ */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('./assets/fonts/dm-sans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./assets/fonts/dm-sans-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./assets/fonts/fraunces-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  * {
+    @apply border-cream-200;
+  }
+
+  body {
+    @apply bg-cream-50 font-sans text-ink-900 antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display font-semibold text-forest-700;
+    font-variation-settings: 'SOFT' 0, 'WONK' 0, 'opsz' 40;
+  }
+
+  ::selection {
+    @apply bg-apricot-200 text-ink-900;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-forest-600 ring-offset-2 ring-offset-cream-50;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-container px-5 sm:px-8 lg:px-10;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full bg-sage-200 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-forest-700;
+  }
+
+  .link-underline {
+    @apply relative after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  /*
+   * 44px touch target for a small standalone text link (breadcrumbs, heading
+   * links) without changing the visual layout: min-height 44px, pulled back by
+   * negative vertical margins so the line box stays the same height.
+   * Only for links that do not sit directly above/below another link.
+   */
+  .tap-target {
+    @apply -my-3 inline-flex min-h-11 min-w-11 items-center;
+  }
+
+  .card-surface {
+    @apply rounded-3xl border border-cream-200 bg-white shadow-soft;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  .grain {
+    background-image: radial-gradient(rgba(18, 74, 49, 0.045) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+}

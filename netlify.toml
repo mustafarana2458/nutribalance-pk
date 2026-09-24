@@ -1,0 +1,43 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/*"
+  # Prerendered routes are real files (dist/<route>/index.html) and are served
+  # directly; this rewrite only catches unknown URLs, which get the empty app
+  # shell so the client renders the 404 page.
+  to = "/200.html"
+  status = 200
+
+# Hashed build output (JS, CSS, fonts, images): the file name changes whenever
+# the content does, so browsers may keep these for a year without revalidating.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# The HTML shell must never be served stale: it is what points at the current
+# hashed assets. "no-cache" = store it, but revalidate on every visit (a cheap
+# 304 when nothing changed). SPA routes such as /about are rewritten to this
+# same file and get Netlify's default "max-age=0, must-revalidate", which
+# behaves the same way.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"

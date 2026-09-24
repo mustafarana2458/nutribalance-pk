@@ -1,0 +1,18 @@
+{
+  "name": "NutriBalance PK",
+  "short_name": "NutriBalance",
+  "description": "Online nutritionist in Pakistan. Personalized diet plans, PCOS and diabetic diet consultations by video \u2014 worldwide.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FAF8F3",
+  "theme_color": "#1F6F4A",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
